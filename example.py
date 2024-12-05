@@ -18,12 +18,12 @@ def search(inn):
     def search_model(ina):
         print("converting input to vectors")
         ina_vec = vec.transform([ina])
-        print("predicting the best fitting title (this takes the longest due to the complex calculations. for each word, it uses a modified distance formula and it compares it to the vectors/tokens in the training data.)")
+        print("predicting the best fitting title")
         prediction = main_m.predict(ina_vec)
         return prediction[0]
 
     final = search_model(inn)
     return final
 
-inp = input("search (describe with as many details as possible): ")
+inp = input("search: ")
 print(search(inp))
