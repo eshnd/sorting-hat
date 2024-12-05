@@ -26,4 +26,4 @@ def search(inn):
     return final
 
 inp = input("search (describe with as many details as possible): ")
-search(inp)
+print(search(inp))
