@@ -1,24 +1,41 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import KNeighborsClassifier
-import numpy as np
+from nltk.stem import WordNetLemmatizer 
+from nltk.corpus import wordnet 
+import nltk
+
+nltk.download("wordnet")
+nltk.download("omw-1.4")
+
+def derive(texts):
+    lem = WordNetLemmatizer()
+    devd = []
+    for text in texts:
+        words = text.split()
+        combined = " ".join(
+            lem.lemmatize(word.lower(), pos=wordnet.VERB) + " " +
+            lem.lemmatize(word.lower(), pos=wordnet.NOUN)
+            for word in words
+        )
+        devd.append(combined)
+    return devd
 
 def search(inn):
     titles = ["", "", ""]
     descps = ["", "", ""]
 
-    print("converting data to vectors")
+    derive_descps = derive(descps)
+    
     vec = TfidfVectorizer()
-    vector_descps = vec.fit_transform(descps)
+    vector_descps = vec.fit_transform(derive_descps)
   
-    print("fitting vectors to the titles")
     main_m = KNeighborsClassifier(n_neighbors=1)
     main_m.fit(vector_descps, titles)
     
 
     def search_model(ina):
-        print("converting input to vectors")
-        ina_vec = vec.transform([ina])
-        print("predicting the best fitting title")
+        d_ina = derive([ina])[0] 
+        ina_vec = vec.transform([d_ina])
         prediction = main_m.predict(ina_vec)
         return prediction[0]
 
