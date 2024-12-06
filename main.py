@@ -21,8 +21,8 @@ def derive(texts):
     return devd
 
 def search(inn):
-    titles = ["", "", ""]
-    descps = ["", "", ""]
+    titles = ["gryffindor", "hufflepuff", "ravenclaw", "slytherin"]
+	descps = ["brave and childish", "dumb and stupid", "smart and goth", "mean and snakes"]
 
     derive_descps = derive(descps)
     
@@ -42,5 +42,5 @@ def search(inn):
     final = search_model(inn)
     return final
 
-inp = input("search: ")
+inp = input("Hello! Welcome to the sorting hat, describe yourself here: ")
 print(search(inp))
