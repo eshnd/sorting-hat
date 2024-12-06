@@ -22,7 +22,7 @@ def derive(texts):
 
 def search(inn):
     titles = ["gryffindor", "hufflepuff", "ravenclaw", "slytherin"]
-    descps = ["brave and childish", "dumb and stupid", "smart and goth", "evil and snakes"]
+    descps = ["brave and childish", "dumb and stupid", "smart and goth", "mean and snake"]
 
     derive_descps = derive(descps)
     
